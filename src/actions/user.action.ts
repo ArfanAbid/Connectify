@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
 // function that takes the user from clerk and syncs it with the database
+/* using webhooks like production code 
 export async function syncUser() {
     try {
         const {userId}= await auth();
@@ -33,3 +34,4 @@ export async function syncUser() {
         console.log("Error in syncUser",error);
     }
 }
+*/    
