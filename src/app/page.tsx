@@ -1,9 +1,21 @@
+import CreatePost from '@/components/CreatePost';
+import { currentUser } from '@clerk/nextjs/server';
 import React from 'react'
 
-const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+export default async function Home() {
+  const user = await currentUser();
 
-export default Home
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+      <div className="lg:col-span-6">
+        {user ? <CreatePost /> : null}
+
+      </div>
+
+      <div className="hidden lg:block lg:col-span-4 sticky top-20">
+        {/* <WhoToFollow /> */}
+      </div>
+    </div>
+  );
+}
