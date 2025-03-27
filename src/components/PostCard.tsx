@@ -37,7 +37,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
       setHasLiked(prev => !prev);
       setOptimisticLikes(prev => prev + (hasLiked ? -1 : 1));
       await toggleLike(post.id);
-    } catch (_error) {
+    } catch {
       setOptimisticLikes(post._count.likes);
       setHasLiked(post.likes.some((like) => like.userId === dbUserId)); 
     }
@@ -54,7 +54,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
         toast.success("Comment posted successfully");
         setNewComment("");
       }
-    } catch (_error) {
+    } catch {
       toast.error("Failed to add comment");
     } finally {
       setIsCommenting(false);
@@ -68,7 +68,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
       const result = await deletePost(post.id);
       if (result.success) toast.success("Post deleted successfully");
       else throw new Error(result.error);
-    } catch (_error) {
+    } catch {
       toast.error("Failed to delete post");
     } finally {
       setIsDeleting(false);
