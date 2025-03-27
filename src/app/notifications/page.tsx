@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatDistanceToNow } from "date-fns";
 import { HeartIcon, MessageCircleIcon, UserPlusIcon } from "lucide-react";
+import Image from "next/image";
 
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -40,7 +41,7 @@ function NotificationsPage() {
 
         const unreadIds = data.filter((n) => !n.read).map((n) => n.id);
         if (unreadIds.length > 0) await markNotificationsAsRead(unreadIds);
-      } catch (error) {
+      } catch (_error) {
         toast.error("Failed to fetch notifications");
       } finally {
         setIsLoading(false);
@@ -99,7 +100,7 @@ function NotificationsPage() {
                           <div className="text-sm text-muted-foreground rounded-md p-2 bg-muted/30 mt-2">
                             <p>{notification.post.content}</p>
                             {notification.post.image && (
-                              <img
+                              <Image
                                 src={notification.post.image}
                                 alt="Post content"
                                 className="mt-2 rounded-md w-full max-w-[200px] h-auto object-cover"

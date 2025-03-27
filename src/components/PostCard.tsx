@@ -12,6 +12,7 @@ import { formatDistanceToNow } from "date-fns";
 import { HeartIcon, LogInIcon, MessageCircleIcon, SendIcon } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { DeleteAlertDialog } from "./DeleteAlertDialog";
+import Image from 'next/image'
 
 
 
@@ -36,7 +37,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
       setHasLiked(prev => !prev);
       setOptimisticLikes(prev => prev + (hasLiked ? -1 : 1));
       await toggleLike(post.id);
-    } catch (error) {
+    } catch (_error) {
       setOptimisticLikes(post._count.likes);
       setHasLiked(post.likes.some((like) => like.userId === dbUserId)); 
     }
@@ -53,7 +54,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
         toast.success("Comment posted successfully");
         setNewComment("");
       }
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to add comment");
     } finally {
       setIsCommenting(false);
@@ -67,7 +68,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
       const result = await deletePost(post.id);
       if (result.success) toast.success("Post deleted successfully");
       else throw new Error(result.error);
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to delete post");
     } finally {
       setIsDeleting(false);
@@ -113,7 +114,7 @@ const PostCard = ({post,dbUserId}:{post:Post,dbUserId:string | null} ) => {
           {/* POST IMAGE */}
           {post.image && (
             <div className="rounded-lg overflow-hidden">
-              <img src={post.image} alt="Post content" className="w-full h-auto object-cover" />
+              <Image src={post.image} alt="Post content" className="w-full h-auto object-cover" />
             </div>
           )}
 
