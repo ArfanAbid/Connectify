@@ -9,8 +9,6 @@ import { ImageIcon, Loader2Icon, SendIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { createPost } from "@/actions/post.action";
 import toast from "react-hot-toast";
-// import { createPost } from "@/actions/post.action";
-// import toast from "react-hot-toast";
 // import ImageUpload from "./ImageUpload";
 
 function CreatePost() {
@@ -70,7 +68,7 @@ function CreatePost() {
                 }}
               />
             </div>
-          )} */}
+          )}  */}
 
           <div className="flex items-center justify-between border-t pt-4">
             <div className="flex space-x-2">
